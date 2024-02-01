@@ -1,70 +1,63 @@
-# Getting Started with Create React App
+### 1 -  Start - Installing Create React App package 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The first thing we have to install is Node.js and with npm install
+we have to install the third party library.
 
-## Available Scripts
+![](img/start/install-third-party-library-npm-1.png)
 
-In the project directory, you can run:
+![](img/start/install-third-party-library-npm-2.png)
+ 
+   Using Visual Code Editor
+  1.1 -  Install next extension `Simple React Snippet`
 
-### `npm start`
+![](img/start/simple-react-snippet.png)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+  1.2 -  Install Prettier Code Formattor
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+  ![](img/start/prettier.png)
 
-### `npm test`
+### 2 -  Create the App
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+![](img/start/command-creating-app.png)
 
-### `npm run build`
+In terminal run with npm start
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+![](img/start/npm-start.png)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+We will delete all files inside the source folder.
+Let's create a new folder `header` and inside `header.js` and `header.css`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+![](img/header/header-js-1.png)
+![](img/header/header-css.png)
 
-### `npm run eject`
+Now let's use Header component in new created App component.
+Create app.js file in ./src/...
+![](img/header/app-js.png)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+In index.js let's render the ui 
+![](img/header/index-js.png)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### 3 -  Install Bootstrap and React Bootstrap
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Install bootstrap and react-bootstrap
+Remove header.css previously created file and remove `import "./header.css";` in `header.js`
+![](img/header/npm-install-bootstrap.png) 
+![](img/header/npm-install-react-bootstrap.png)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Edit `header.js` file
 
-## Learn More
+![](img/header/header-js-2.png)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### 4 -  Routing - Configure the paths
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+step 1 - Install `react-router-dom` if you haven't already:
 
-### Code Splitting
+![](img/routing-header/terminal-install-react-router-dom.png)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+step 2 - Check if you have a `BrowserRouter` wrapping your application. This is usually done in your main `index.js`
 
-### Analyzing the Bundle Size
+![](img/routing-header/index-js.png)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+step 3 - Use `Link` component for navigation:
+Replace the `href` attribute with the `to` prop provided by `Link`:
+![](img/routing-header/header-js.png)
