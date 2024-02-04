@@ -50,14 +50,56 @@ Edit `header.js` file
 
 ### 4 -  Routing - Configure the paths
 
-step 1 - Install `react-router-dom` if you haven't already:
+Step 1 - Install `react-router-dom` if you haven't already:
 
 ![](img/routing-header/terminal-install-react-router-dom.png)
 
-step 2 - Check if you have a `BrowserRouter` wrapping your application. This is usually done in your main `index.js`
-
-![](img/routing-header/index-js.png)
-
-step 3 - Use `Link` component for navigation:
+Step 2 - In header.js
+Use `Link` component for navigation:
 Replace the `href` attribute with the `to` prop provided by `Link`:
 ![](img/routing-header/header-js.png)
+
+Step 3 - In app.js
+
+![](img/routing-header/app-js.png)
+
+We have this 
+![](img/routing-header/result.png)
+
+### 4 -  Before continue - refactoring the code
+ Inside  `src` folder let's create a new folder `components` and put all ours component (`admin`, `forbidden` ..) inside.
+![](img/refactoring/components-folder.png)
+
+Lets rename our components files as `..Component` and change `.js` extension to `.jsx`
+
+![](img/refactoring/refactoring.png)
+
+
+### 5 -  Create form login
+
+We have to install `axios`.
+We will use `useState `for managing form state.
+
+![](img/form-login/installing-axios.png)
+
+Create file `loginComponent.jsx`
+
+![](img/form-login/login-component-jsx-1.png)
+
+We have this 
+
+![](img/form-login/result-1.png)
+
+### 6 -  Communication with the backend
+
+Now after launching the spring-boot app in backend
+
+We have to change `loginComponent.jsx` file to call the backend API
+
+We use `useState `for managing form state and `axios` for making HTTP requests. Note that you need to install axios separately by running npm install axios in your React project.
+
+![](img/form-login/login-component-jsx-2.png)
+
+![](img/form-login/result-2.png)
+
+We have the server returned us a jwt token that we have to store somewhere, 
