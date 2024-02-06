@@ -5,10 +5,12 @@ import Home from "./components/home/homeComponent";
 import Admin from "./components/admin/adminComponent";
 import User from "./components/user/userComponent";
 import Login from "./components/login/loginComponent";
+import { AuthProvider } from "./context/authContext";
 
 const App = () => {
   return (
-    <Router>
+    <AuthProvider>
+      <Router>
       <div>
         <Header />
         <Routes>
@@ -20,6 +22,9 @@ const App = () => {
         </Routes>
       </div>
     </Router>
+
+    </AuthProvider>
+    
   );
 };
 

@@ -1,35 +1,46 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useAuth } from "../../context/authContext"; // Import useAuth hook
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const PATH_OF_API = "http://localhost:9090";
 
+  const { login } = useAuth(); // Use useAuth hook to access context
+  const navigate = useNavigate(); // Get the history object from react-router-dom
+
   const [formData, setFormData] = useState({
-    userName: '',
-    userPassword:'',
+    userName: "",
+    userPassword: "",
   });
 
   const handleInputChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value }); 
-    
-    // // Log the entered username and password
-    // console.log(
-    //   `Username: ${formData.userName}, Password: ${formData.userPassword}`
-    // );
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-
-    // Log the entered username and password before send request
+    e.preventDefault();    
     console.log(
       `Username: ${formData.userName}, Password: ${formData.userPassword}`
     );
 
     axios
-      .post(PATH_OF_API + '/authenticate', formData)
+      .post(PATH_OF_API + "/authenticate", formData)
       .then((response) => {
+        login(response.data); // Call login function from context
         console.log(response.data);
+
+        // Check if the user is an admin
+        const isAdmin = response.data.user.role[0].roleName.includes("Admin");
+
+        if (isAdmin) {
+          // Redirect to the admin route
+          console.log("isAdmin is :" + isAdmin);
+          navigate("/admin");
+        } else {
+          console.log('isAdmin is :" + !isAdmin');
+          navigate("/home");
+        }
       })
       .catch((error) => {
         console.error(error);
@@ -38,7 +49,7 @@ const Login = () => {
 
   return (
     <div className="container mt-5">
-      <div className="card" style={{ padding: '20px' }}>
+      <div className="card" style={{ padding: "20px" }}>
         <form onSubmit={handleSubmit}>
           <input
             type="text"

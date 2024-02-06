@@ -103,3 +103,28 @@ We use `useState `for managing form state and `axios` for making HTTP requests. 
 ![](img/form-login/result-2.png)
 
 We have the server returned us a jwt token that we have to store somewhere, 
+
+
+### 7 - Like using localStorage in Angular , in React -> React context and hooks
+
+Implement the functionality to store data from the backend API (like jwtToken and roles) in localStorage and then redirect the user based on their role in our React app.
+
+Let's create like in Anguar a similar service in React for managing user authentication. 
+Create inside src a new folder `context`.
+Create a new file `called authContext.jsx` in src/context folder with the following content:
+![](img/auth-context/structure-aut-context.png)
+![](img/auth-context/auth-context.png)
+
+
+And wrap our `app` component with the `AuthProvider` in `app.js`
+
+![](img/auth-context/app-js.png)
+
+Now, in our `loginComponent.jsx` we will use `useAuth` hook to access the authentication context ans call the `login` function when the 
+login is successful.
+
+![](img/auth-context/login-component.png)
+
+
+
+
