@@ -126,5 +126,57 @@ login is successful.
 ![](img/auth-context/login-component.png)
 
 
+### 8 - Write logic for Login and Logout
+
+In React , we can implement condional rendering similar to Angular `ngIf` using JavaScript logical operators within JSX.
+We can achieve this by conditionally rendering different elements based on the state of authentication.
+We have to modify our `headerComponent.jsx`
+
+![](img/login-logout-logic/header-component-1.png)
 
 
+In the context where we manage the authenifiction state we will add `isLoggedIn` state and a function `setIsLoggedIn` to update the authentication state
+
+![](img/login-logout-logic/auth-context.png)
+
+`const [isLoggedIn, setIsLoggedIn] = useState(false);`
+
+
+1 - `const`: This keyword is used to declare a constant variable. In this case, it's declaring a constant named isLoggedIn.
+
+2 - [isLoggedIn, setIsLoggedIn]: This is array destructuring syntax. It's used to extract values from an array. In this case, it's extracting two values from the array returned by `useState(false)`. The first value is assigned to `isLoggedIn`, and the second value is assigned to `setIsLoggedIn`.
+
+3 - useState(false): This is a React Hook called useState. It allows functional components to manage state. The argument false passed to useState is the initial state value for the isLoggedIn variable. It initializes isLoggedIn to false.
+
+So, overall, this line of code is declaring a constant variable isLoggedIn and a function `setIsLoggedIn`, which are used to manage the state of whether a user is logged in `(true)` or not logged in `(false)`. Initially, `isLoggedIn` is set to `false`. Later, when you call `setIsLoggedIn(true)`, it will update `isLoggedIn` to `true`, indicating that the user is logged in. Similarly, `setIsLoggedIn(false)` will update `isLoggedIn` to `false`, indicating that the user is logged out.
+
+ 
+ Let's change the home, admin and user page with bootstrap.
+ ![](img/login-logout-logic/home-component-bootstrap.png)
+ ![](img/login-logout-logic/home-component-rendered.png)
+
+[![login-logout](img/login-logout-logic/youtube-thumb.png)](https://youtu.be/SQShJEMMiIc "login-logout")
+
+
+### 9 - Show Admin or User Dashboard respectively to who is logged in
+
+To achieve rendering different components based on the user's role, we'll need to modify our React application's logic. 
+Here's how we can do it:
+
+
+Update `authContext.jsx` and `headerComponent.jsx`
+
+`authContext.jsx`
+
+![](img/login-logout-logic/auth-context-2.png)
+
+`headerComponent.jsx`
+
+![](img/login-logout-logic/header-component-2.png)
+
+
+
+
+
+
+[![login-logout-2](img/login-logout-logic/youtube-thumb-2.png)](https://youtu.be/7qrI-jyATbk "login-logout-2")

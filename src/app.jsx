@@ -6,6 +6,7 @@ import Admin from "./components/admin/adminComponent";
 import User from "./components/user/userComponent";
 import Login from "./components/login/loginComponent";
 import { AuthProvider } from "./context/authContext";
+import Forbidden from "./components/forbidden/forbiddenComponent";
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
           <Route path="/user" element={<User/>} />
           <Route path="/home" element={<Home/>} />
           <Route path="/login" element={<Login/>} />
+          <Route path="/forbidden" element={<Forbidden/>} />
         </Routes>
       </div>
     </Router>
