@@ -19,7 +19,7 @@ const Login = () => {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();    
+    e.preventDefault();
     console.log(
       `Username: ${formData.userName}, Password: ${formData.userPassword}`
     );
@@ -28,15 +28,22 @@ const Login = () => {
       .post(PATH_OF_API + "/authenticate", formData)
       .then((response) => {
         login(response.data); // Call login function from context
+        console.log("----------------------------------");
+        console.log("LoginComponent#response.data");
         console.log(response.data);
 
         // Check if the user is an admin
         const isAdmin = response.data.user.role[0].roleName.includes("Admin");
+        const isUser = response.data.user.role[0].roleName.includes("User");
 
         if (isAdmin) {
           // Redirect to the admin route
-          console.log("isAdmin is :" + isAdmin);
+          console.log("LoginComponent#isAdmin is :" + isAdmin);
           navigate("/admin");
+        } else if (isUser) {
+          // Redirect to the admin route
+          console.log("LoginComponent#isUser is :" + isUser);
+          navigate("/user");
         } else {
           console.log('isAdmin is :" + !isAdmin');
           navigate("/home");

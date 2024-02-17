@@ -1,30 +1,56 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState, useEffect } from "react";
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [roles, setRoles] = useState([]);
-  const [jwtToken, setJwtToken] = useState("");
-  const [isLoggedIn, setIsLoggedIn] = useState(false); 
-  const [userRole, setUserRole] = useState(""); // New state for user role
+  const [roles, setRoles] = useState(
+    JSON.parse(localStorage.getItem("roles")) || {}
+  );
+  const [jwtToken, setJwtToken] = useState(
+    localStorage.getItem("jwtToken") || ""
+  );
+  const isLoggedIn = !!jwtToken;
+  const [user, setUser] = useState(
+    JSON.parse(localStorage.getItem("user")) || {}
+  );
+  const [userRole, setUserRole] = useState(); // New state for user role
+
+  //const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const login = (response) => {
-    setRoles(response.user.role);
+    // const { user, jwtToken,} = response;
+    // setUser(user);
+    // setJwtToken(jwtToken);
+    // setRoles(response.user.role[0].roleName);
+
+    //setRoles(response.user.role);
     setJwtToken(response.jwtToken);
-    setIsLoggedIn(true); 
     setUserRole(response.user.role[0].roleName); // Set user's role upon login
+
+    localStorage.setItem("user", JSON.stringify(user));
+    localStorage.setItem("jwtToken", response.jwtToken);
+    localStorage.setItem("userRole", response.user.role[0].roleName);
   };
 
   const logout = () => {
-    setRoles([]);
+    setUser({});
     setJwtToken("");
-    setIsLoggedIn(false);
-    setUserRole(""); // Clear user's role upon logout
+    localStorage.removeItem("user");
+    localStorage.removeItem("jwtToken");
+    localStorage.removeItem("userRole");
   };
+
+  // Load userRole from localStorage on initial render
+  useEffect(() => {
+    const storedUserRole = localStorage.getItem("userRole");
+    if (storedUserRole) {
+      setUserRole(storedUserRole);
+    }
+  }, []);
 
   return (
     <AuthContext.Provider
-      value={{ roles, jwtToken, isLoggedIn, userRole, login, logout }} 
+      value={{ roles, userRole, user, jwtToken, isLoggedIn, login, logout }}
     >
       {children}
     </AuthContext.Provider>

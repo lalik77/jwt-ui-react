@@ -6,16 +6,20 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../../context/authContext";
 
 const Header = () => {
-  const { isLoggedIn, logout, userRole } = useAuth();
+  const { isLoggedIn, logout, userRole} = useAuth();
 
-  return (
+  console.log("HeaderComponent#isLoggedIn:", isLoggedIn);
+  console.log("HeaderComponent#userRole:", userRole);
+  //console.log("roles:", roles);
+
+  return (    
     <Navbar
       style={{ backgroundColor: "#e3f2fd" }}
       bg="l#e3f2fd"
       data-bs-theme="light"
     >
       <Container>
-        <Navbar.Brand href="#home">React & JWT</Navbar.Brand>
+        <Navbar.Brand href="/">React & JWT</Navbar.Brand>
         <Nav className="me-auto">
           <Link to="/home" className="nav-link">
             Home
@@ -32,6 +36,7 @@ const Header = () => {
                 User Dashboard
               </Link>
             )}
+         
         </Nav>
         {isLoggedIn ? (
           <Link to="/home" onClick={logout} className="btn btn-danger">

@@ -7,26 +7,41 @@ import User from "./components/user/userComponent";
 import Login from "./components/login/loginComponent";
 import { AuthProvider } from "./context/authContext";
 import Forbidden from "./components/forbidden/forbiddenComponent";
+import { ProtectedRoute } from "./utils/protectedRoute";
 
 const App = () => {
   return (
     <AuthProvider>
       <Router>
-      <div>
-        <Header />
-        <Routes>
-          <Route path="/" exact element={<Home/>} />
-          <Route path="/admin" element={<Admin/>} />
-          <Route path="/user" element={<User/>} />
-          <Route path="/home" element={<Home/>} />
-          <Route path="/login" element={<Login/>} />
-          <Route path="/forbidden" element={<Forbidden/>} />
-        </Routes>
-      </div>
-    </Router>
+        <div>
+          <Header />
+          <Routes>
+            <Route path="/" exact element={<Home />} />
 
+            <Route element={<ProtectedRoute roles={["Admin"]}/>}>
+              <Route path="/admin" element={<Admin />} roles={["Admin"]} />
+            </Route>
+
+            <Route element={<ProtectedRoute roles={["User"]}/>}>
+              <Route path="/user" element={<User />} />
+            </Route>
+
+            {/* <Route
+              path="/user"
+              element={
+                <ProtectedRoute roles={["User"]}>
+                  <User />
+                </ProtectedRoute>
+              }
+            /> */}
+
+            <Route path="/home" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/forbidden" element={<Forbidden />} />
+          </Routes>
+        </div>
+      </Router>
     </AuthProvider>
-    
   );
 };
 
