@@ -5,7 +5,11 @@ export const ProtectedRoute = ({ roles, ...rest }) => {
   const { jwtToken, userRole } = useAuth();
 
   // Check if the user is authenticated
-  console.log("Checking authentication...");
+  console.log("ProtectedRoute# Checking authentication...");
+  console.log("ProtectedRoute#jwt: " + jwtToken);
+  console.log("ProtectedRoute#userRole: " + userRole);
+  console.log("ProtectedRoute#roles: " + JSON.stringify(roles));
+  console.log("------------------------------------ProtectedRoute#Block#Finish:------------------------------------");
 
   // Check if the user is authenticated
   if (!jwtToken) {
@@ -19,7 +23,7 @@ export const ProtectedRoute = ({ roles, ...rest }) => {
   if (roles && roles.length > 0 && !roles.includes(userRole)) {
     // If the user's role does not match the required roles, redirect to the forbidden page
     console.log("User does not have required role. Redirecting to forbidden page.");
-    console.log("second statment : " + localStorage.getItem("jwtToken"));
+    console.log("second statment : " + localStorage.getItem("jwtToken"));    
     return <Navigate to="/forbidden" />;
   }
 

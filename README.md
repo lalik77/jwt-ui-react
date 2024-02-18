@@ -174,9 +174,97 @@ Update `authContext.jsx` and `headerComponent.jsx`
 
 ![](img/login-logout-logic/header-component-2.png)
 
-
-
-
-
-
 [![login-logout-2](img/login-logout-logic/youtube-thumb-2.png)](https://youtu.be/7qrI-jyATbk "login-logout-2")
+
+### 10 - Authentication and Authorization with React Router
+
+We will create protected routes
+
+Let's create a new folders `utils`, `forbidden` , create a new file `protectedRoute.jsx` , `forbiddenComponent.jsx` and let's rename `app.js` to `app.jsx`.
+
+![](img/protected-routes/create-protected-route-1.png)
+
+`protectedRoute.jsx`
+![](img/protected-routes/protected-route-1.png)
+
+`forbiddenComponent.jsx`
+![](img/protected-routes/forbidden.png)
+
+Let's use our protected route element in `app.jsx`
+
+
+Let's add some logging in our `headerComponent.jsx`
+
+![](img/protected-routes/header-component.png)
+
+Let's also refactor `authContext.jsx`
+
+```JSX
+import React, { createContext, useContext, useState, useEffect } from "react";
+
+const AuthContext = createContext();
+
+export const AuthProvider = ({ children }) => {
+  const [roles, setRoles] = useState(
+    JSON.parse(localStorage.getItem("roles")) || {}
+  );
+  const [jwtToken, setJwtToken] = useState(
+    localStorage.getItem("jwtToken") || ""
+  );
+  const isLoggedIn = !!jwtToken;
+  const [user, setUser] = useState(
+    JSON.parse(localStorage.getItem("user")) || {}
+  );
+  const [userRole, setUserRole] = useState(localStorage.getItem("userRole") || "");   
+
+  console.log("AuthContext#jwtToken: " + jwtToken);
+  console.log("AuthContext#userRole: " + userRole);
+  console.log("------------------------------------AuthContext#Block#Finish:------------------------------------");
+
+  const login = (response) => {    
+    setJwtToken(response.jwtToken);
+    setUserRole(response.user.role[0].roleName); // Set user's role upon login    
+    localStorage.setItem("jwtToken", response.jwtToken);
+    localStorage.setItem("userRole", response.user.role[0].roleName);
+  };
+
+  const logout = () => {   
+    setJwtToken("");    
+    setUserRole("");    
+    localStorage.clear();
+  };
+
+  // Load userRole from localStorage on initial render
+  useEffect(() => {
+    const storedUserRole = localStorage.getItem("userRole");    
+    if (storedUserRole) {
+      setUserRole(storedUserRole);
+    }   
+  }, []);
+
+  return (
+    <AuthContext.Provider
+      value={{ roles, userRole, user, jwtToken, isLoggedIn, login, logout }}
+    >
+      {children}
+    </AuthContext.Provider>
+  );
+};
+
+export const useAuth = () => {
+  const context = useContext(AuthContext);
+  if (!context) {
+    throw new Error("useAuth must be used within an AuthProvider");
+  }
+  return context;
+};
+
+```
+
+To test the application, let's make some changes in our Spring Boot app to create a concrete user during initilization.
+
+![](img/protected-routes/spring-boot-user-init.png)
+
+You can find the code at commit  authentication-authorization-with-react-router
+
+[![protected-routes](img/protected-routes/youtube-thumb.png)](https://youtu.be/R5xZi_XaG8E "protected-routes")

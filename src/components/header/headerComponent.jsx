@@ -6,11 +6,12 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../../context/authContext";
 
 const Header = () => {
-  const { isLoggedIn, logout, userRole} = useAuth();
+  const { isLoggedIn, logout, userRole,roles} = useAuth();
 
   console.log("HeaderComponent#isLoggedIn:", isLoggedIn);
   console.log("HeaderComponent#userRole:", userRole);
-  //console.log("roles:", roles);
+  console.log("HeaderComponent#roles:", roles);
+  console.log("------------------------------------HeaderComponent#Block#Finish:------------------------------------");
 
   return (    
     <Navbar

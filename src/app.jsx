@@ -9,6 +9,7 @@ import { AuthProvider } from "./context/authContext";
 import Forbidden from "./components/forbidden/forbiddenComponent";
 import { ProtectedRoute } from "./utils/protectedRoute";
 
+
 const App = () => {
   return (
     <AuthProvider>
@@ -18,22 +19,13 @@ const App = () => {
           <Routes>
             <Route path="/" exact element={<Home />} />
 
-            <Route element={<ProtectedRoute roles={["Admin"]}/>}>
-              <Route path="/admin" element={<Admin />} roles={["Admin"]} />
+            <Route element={<ProtectedRoute roles={["Admin"]} />}>
+              <Route path="/admin" element={<Admin />} />
             </Route>
 
-            <Route element={<ProtectedRoute roles={["User"]}/>}>
+            <Route element={<ProtectedRoute roles={["User"]} />}>
               <Route path="/user" element={<User />} />
-            </Route>
-
-            {/* <Route
-              path="/user"
-              element={
-                <ProtectedRoute roles={["User"]}>
-                  <User />
-                </ProtectedRoute>
-              }
-            /> */}
+            </Route>           
 
             <Route path="/home" element={<Home />} />
             <Route path="/login" element={<Login />} />

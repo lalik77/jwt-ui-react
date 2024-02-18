@@ -13,39 +13,31 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(
     JSON.parse(localStorage.getItem("user")) || {}
   );
-  const [userRole, setUserRole] = useState(); // New state for user role
+  const [userRole, setUserRole] = useState(localStorage.getItem("userRole") || "");   
 
-  //const [isLoggedIn, setIsLoggedIn] = useState(false);
+  console.log("AuthContext#jwtToken: " + jwtToken);
+  console.log("AuthContext#userRole: " + userRole);
+  console.log("------------------------------------AuthContext#Block#Finish:------------------------------------");
 
-  const login = (response) => {
-    // const { user, jwtToken,} = response;
-    // setUser(user);
-    // setJwtToken(jwtToken);
-    // setRoles(response.user.role[0].roleName);
-
-    //setRoles(response.user.role);
+  const login = (response) => {    
     setJwtToken(response.jwtToken);
-    setUserRole(response.user.role[0].roleName); // Set user's role upon login
-
-    localStorage.setItem("user", JSON.stringify(user));
+    setUserRole(response.user.role[0].roleName); // Set user's role upon login    
     localStorage.setItem("jwtToken", response.jwtToken);
     localStorage.setItem("userRole", response.user.role[0].roleName);
   };
 
-  const logout = () => {
-    setUser({});
-    setJwtToken("");
-    localStorage.removeItem("user");
-    localStorage.removeItem("jwtToken");
-    localStorage.removeItem("userRole");
+  const logout = () => {   
+    setJwtToken("");    
+    setUserRole("");    
+    localStorage.clear();
   };
 
   // Load userRole from localStorage on initial render
   useEffect(() => {
-    const storedUserRole = localStorage.getItem("userRole");
+    const storedUserRole = localStorage.getItem("userRole");    
     if (storedUserRole) {
       setUserRole(storedUserRole);
-    }
+    }   
   }, []);
 
   return (
