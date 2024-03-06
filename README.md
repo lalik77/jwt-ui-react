@@ -1,4 +1,4 @@
-### 1 -  Start - Installing Create React App package 
+# 1 -  Start - Installing Create React App package 
 
 The first thing we have to install is Node.js and with npm install
 we have to install the third party library.
@@ -8,6 +8,7 @@ we have to install the third party library.
 ![](img/start/install-third-party-library-npm-2.png)
  
    Using Visual Code Editor
+   
   1.1 -  Install next extension `Simple React Snippet`
 
 ![](img/start/simple-react-snippet.png)
@@ -16,7 +17,7 @@ we have to install the third party library.
 
   ![](img/start/prettier.png)
 
-### 2 -  Create the App
+# 2 -  Create the App
 
 ![](img/start/command-creating-app.png)
 
@@ -37,7 +38,7 @@ Create app.js file in ./src/...
 In index.js let's render the ui 
 ![](img/header/index-js.png)
 
-### 3 -  Install Bootstrap and React Bootstrap
+# 3 -  Install Bootstrap and React Bootstrap
 
 Install bootstrap and react-bootstrap
 Remove header.css previously created file and remove `import "./header.css";` in `header.js`
@@ -48,7 +49,7 @@ Edit `header.js` file
 
 ![](img/header/header-js-2.png)
 
-### 4 -  Routing - Configure the paths
+# 4 -  Routing - Configure the paths
 
 Step 1 - Install `react-router-dom` if you haven't already:
 
@@ -66,7 +67,7 @@ Step 3 - In app.js
 We have this 
 ![](img/routing-header/result.png)
 
-### 4 -  Before continue - refactoring the code
+# 4 -  Before continue - refactoring the code
  Inside  `src` folder let's create a new folder `components` and put all ours component (`admin`, `forbidden` ..) inside.
 ![](img/refactoring/components-folder.png)
 
@@ -75,7 +76,7 @@ Lets rename our components files as `..Component` and change `.js` extension to 
 ![](img/refactoring/refactoring.png)
 
 
-### 5 -  Create form login
+# 5 -  Create form login
 
 We have to install `axios`.
 We will use `useState `for managing form state.
@@ -90,7 +91,7 @@ We have this
 
 ![](img/form-login/result-1.png)
 
-### 6 -  Communication with the backend
+# 6 -  Communication with the backend
 
 Now after launching the spring-boot app in backend
 
@@ -105,7 +106,7 @@ We use `useState `for managing form state and `axios` for making HTTP requests. 
 We have the server returned us a jwt token that we have to store somewhere, 
 
 
-### 7 - Like using localStorage in Angular , in React -> React context and hooks
+# 7 - Like using localStorage in Angular , in React -> React context and hooks
 
 Implement the functionality to store data from the backend API (like jwtToken and roles) in localStorage and then redirect the user based on their role in our React app.
 
@@ -126,7 +127,7 @@ login is successful.
 ![](img/auth-context/login-component.png)
 
 
-### 8 - Write logic for Login and Logout
+# 8 - Write logic for Login and Logout
 
 In React , we can implement condional rendering similar to Angular `ngIf` using JavaScript logical operators within JSX.
 We can achieve this by conditionally rendering different elements based on the state of authentication.
@@ -158,7 +159,7 @@ So, overall, this line of code is declaring a constant variable isLoggedIn and a
 [![login-logout](img/login-logout-logic/youtube-thumb.png)](https://youtu.be/SQShJEMMiIc "login-logout")
 
 
-### 9 - Show Admin or User Dashboard respectively to who is logged in
+# 9 - Show Admin or User Dashboard respectively to who is logged in
 
 To achieve rendering different components based on the user's role, we'll need to modify our React application's logic. 
 Here's how we can do it:
@@ -176,7 +177,7 @@ Update `authContext.jsx` and `headerComponent.jsx`
 
 [![login-logout-2](img/login-logout-logic/youtube-thumb-2.png)](https://youtu.be/7qrI-jyATbk "login-logout-2")
 
-### 10 - Authentication and Authorization with React Router
+# 10 - Authentication and Authorization with React Router
 
 We will create protected routes
 
@@ -268,3 +269,27 @@ To test the application, let's make some changes in our Spring Boot app to creat
 You can find the code at commit  authentication-authorization-with-react-router
 
 [![protected-routes](img/protected-routes/youtube-thumb.png)](https://youtu.be/R5xZi_XaG8E "protected-routes")
+
+# 11 - Calling end points in the backend especially created for user and admin
+
+We have to hit those endpoints (See backend application)
+
+![](img/hit-backend-endpoints/hit-end-points.png)
+
+Open `adminComponent.jsx` and add some code.
+
+![](img/hit-backend-endpoints/admin-component.png)
+
+Let's test as admin
+
+![](img/hit-backend-endpoints/test-as-admin.png)
+
+Write the same thing for user
+
+Open `userComponent.jsx` and add some code.
+
+![](img/hit-backend-endpoints/user-component.png)
+
+Let's test as user
+
+![](img/hit-backend-endpoints/test-as-user.png)
